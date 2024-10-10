@@ -39,11 +39,11 @@ namespace Domain.Tests
             // Arrange    
             AccountBase testAccount = AccountBase.CreateAccount(AccountType.Silver);
             // Act
-            testAccount.AddTransaction(+200M);
-            testAccount.AddTransaction(-100M);
+            testAccount.AddTransaction(200M);
+            testAccount.RemoveTransaction(100M);
             decimal balance = testAccount.Balance;
             // Assert
-            Assert.AreEqual(balance, +100M);
+            Assert.AreEqual(balance, 100M);
         }
         [TestMethod]
         public void NegativeBalanceAllowed()
@@ -51,8 +51,8 @@ namespace Domain.Tests
             // Arrange    
             AccountBase testAccount = AccountBase.CreateAccount(AccountType.Silver);
             // Act
-            testAccount.AddTransaction(+200M);
-            testAccount.AddTransaction(-500M);
+            testAccount.AddTransaction(200M);
+            testAccount.RemoveTransaction(500M);
             decimal balance = testAccount.Balance;
             // Assert
             Assert.AreEqual(balance, -300M);

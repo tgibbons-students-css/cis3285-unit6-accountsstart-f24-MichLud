@@ -13,7 +13,7 @@
 <br>
 <br>
 <label for="accountList">Current Accounts:</label>
-<select name="accountList" id="accountList" class="form-control" @bind="selectedAccountName" @bind:event="onchange">
+<select name="accountList" id="accountList" class="form-control" @onchange="OnAccountChanged">
     @if (accountList != null && accountList.Count > 0)
     {
         <option value="NoAccountSelected">Select an account</option>
@@ -80,6 +80,12 @@
         accountBalance = acctService.GetAccountBalance(selectedAccountName);
         strAccountBalance = accountBalance.ToString();
         StateHasChanged();
+    }
+
+    private void OnAccountChanged(ChangeEventArgs e)
+    {
+        selectedAccountName = e.Value.ToString();
+        updateAccount();
     }
 
     private void btnWithdraw_Click()
